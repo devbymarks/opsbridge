@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: opsbridge
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/opsbridge}
+    username: ${DB_USERNAME:opsbridge}
+    password: ${DB_PASSWORD:opsbridge_dev}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: ${PORT:8080}
