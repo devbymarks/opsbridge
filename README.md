@@ -1,67 +1,93 @@
-# OpsBridge — Ops Command
+<div align="center">
 
-Central demonstrativa de incidentes e diagnóstico de TI, pensada para simular rotinas de suporte N1/N2: abertura e acompanhamento de incidentes, checklist de troubleshooting, evidências, responsáveis, histórico e relatório técnico.
+# ⚡ OpsBridge — Ops Command
 
-> **Estado honesto do pacote:** inclui frontend, API, banco, testes automatizados de serviço e testes de integração HTTP usando H2. O código foi revisado e o JavaScript pode ser validado localmente. Este ambiente de geração não possui Docker nem Maven e não permite baixar dependências, portanto a suíte Java ainda precisa ser executada no computador de teste. Não use o MVP em produção nem exponha publicamente: autenticação e autorização ainda não existem.
+**Central de incidentes, troubleshooting e diagnóstico operacional de TI.**
 
-## Funcionalidades
+Uma aplicação demonstrativa para organizar rotinas de suporte N1/N2, acompanhar incidentes e registrar evidências técnicas em um único lugar.
 
-- Dashboard com contadores de incidentes e fila pesquisável/filtrável.
-- Cadastro com categoria, prioridade, descrição e solicitante.
-- Checklist inicial sugerido conforme categoria (rede/DNS, banco de dados ou aplicação).
-- Alteração de status e atribuição de responsável.
-- Adição de verificações e atualização de resultado/evidências.
-- Linha do tempo das ações.
-- Registro de resolução e relatório TXT para escalonamento.
-- Validação de campos e respostas de erro para incidentes inexistentes.
-- Tema Ops Command: interface escura, azul elétrico, layout responsivo.
+</div>
 
-## Stack
+---
 
-- Java 21 + Spring Boot 3.5
-- Spring Web, Spring Data JPA e Bean Validation
-- PostgreSQL 16
-- HTML, CSS e JavaScript sem framework
-- Docker Compose
-- Maven
-- H2 para testes de integração automatizados
+## 📌 Sobre o projeto
 
-## Opção A — executar tudo com Docker (recomendado)
+O **OpsBridge** simula uma central de operações de TI em que a equipe pode abrir incidentes, acompanhar seu andamento, executar checklists de diagnóstico, registrar evidências e gerar relatórios técnicos para resolução ou escalonamento.
 
-Requisitos: Docker Desktop recente no Windows ou Docker Engine + Docker Compose v2 no Linux/macOS. O Docker constrói a aplicação Java e executa os testes Maven durante a construção da imagem, sem exigir Java ou Maven instalados na máquina.
+O projeto foi desenvolvido como **MVP de portfólio**, com foco em backend Java, APIs REST, persistência relacional, testes automatizados e uma interface web responsiva com identidade visual escura no estilo **Ops Command**.
 
-1. Extraia o ZIP.
+> **Status do projeto:** pacote demonstrativo. A aplicação inclui frontend, API, persistência, testes de serviço e testes de integração HTTP com H2. A suíte Java precisa ser executada no ambiente local de desenvolvimento. O MVP ainda não possui autenticação ou autorização e não deve ser exposto publicamente nem utilizado em produção.
+
+## ✨ Funcionalidades
+
+- 📊 Dashboard com contadores e fila de incidentes pesquisável e filtrável.
+- 📝 Abertura de incidentes com categoria, prioridade, descrição e solicitante.
+- 🧭 Sugestão de checklist inicial por categoria: rede/DNS, banco de dados ou aplicação.
+- 👤 Atribuição de responsável e atualização de status.
+- 🔎 Registro de verificações, resultados e evidências de troubleshooting.
+- 🕒 Linha do tempo das atividades realizadas no incidente.
+- ✅ Registro da resolução e geração de relatório técnico em TXT.
+- 🛡️ Validação de dados e tratamento de erros, incluindo incidentes inexistentes.
+- 🎨 Interface responsiva com tema escuro, detalhes em azul elétrico e identidade Ops Command.
+
+## 🧰 Tecnologias
+
+| Tecnologia | Utilização |
+|---|---|
+| Java 21 | Linguagem principal do backend |
+| Spring Boot 3.5 | Estrutura da aplicação e API |
+| Spring Web | Endpoints HTTP/REST |
+| Spring Data JPA | Persistência e acesso a dados |
+| Bean Validation | Validação dos dados de entrada |
+| PostgreSQL 16 | Banco de dados da aplicação |
+| H2 | Banco em memória para testes de integração |
+| HTML, CSS e JavaScript | Interface web sem framework frontend |
+| Maven | Gerenciamento de dependências e build |
+| Docker Compose | Inicialização dos serviços em ambiente local |
+| Python | Execução opcional do script de smoke test; não é necessário para executar a aplicação Java |
+
+## 🚀 Como executar com Docker
+
+Esta é a opção recomendada. Você precisa do **Docker Desktop** no Windows ou do **Docker Engine com Docker Compose v2** no Linux/macOS. O build da imagem compila a aplicação e executa os testes Maven durante a construção.
+
+1. Baixe ou clone este repositório.
 2. Abra um terminal na pasta `opsbridge-completo`.
-3. Opcional: copie `.env.example` para `.env` e ajuste as portas/credenciais locais.
+3. Opcionalmente, copie `.env.example` para `.env` e ajuste as configurações locais.
 4. Execute:
 
    ```bash
    docker compose up --build
    ```
 
-5. Aguarde os serviços ficarem saudáveis e abra **http://localhost:8080**.
-6. Para verificar o estado:
+5. Quando os serviços estiverem iniciados, acesse **http://localhost:8080**.
+6. Para consultar o estado dos serviços e os logs:
 
    ```bash
    docker compose ps
    docker compose logs -f app
    ```
 
-7. Para parar sem apagar os dados:
+7. Para encerrar os serviços sem remover os dados persistidos:
 
    ```bash
    docker compose down
    ```
 
-Para apagar também o volume de banco e todos os dados locais, use `docker compose down -v` (ação destrutiva).
+> **Atenção:** `docker compose down -v` também remove o volume do banco e apaga os dados locais persistidos.
 
-### Windows — atalho
+### 🪟 Atalho para Windows
 
-Também está incluído `iniciar-windows.bat`. Dê dois cliques ou execute pelo terminal na raiz do projeto. Ele verifica se o Docker está disponível e inicia a composição com build.
+O projeto inclui o arquivo `iniciar-windows.bat`. Execute-o a partir da pasta raiz para verificar a disponibilidade do Docker e iniciar os serviços com build.
 
-## Opção B — executar com Java/Maven local
+## ☕ Como executar com Java e Maven
 
-Requisitos: JDK 21, Maven 3.9+ e Docker Compose v2.
+Requisitos:
+
+- JDK 21
+- Maven 3.9 ou superior
+- Docker Compose v2 para iniciar o PostgreSQL configurado no projeto
+
+Na raiz do projeto, execute:
 
 ```bash
 docker compose up -d postgres
@@ -69,11 +95,23 @@ mvn test
 mvn spring-boot:run
 ```
 
-Acesse http://localhost:8080. Para encerrar a aplicação, pressione `Ctrl+C`; o banco pode ser parado com `docker compose stop postgres`.
+A aplicação ficará disponível em **http://localhost:8080**. Para encerrá-la, pressione `Ctrl+C`. Para parar o banco, execute:
 
-## Testes automatizados
+```bash
+docker compose stop postgres
+```
 
-Os testes cobrem a criação do incidente e o checklist sugerido, além de um fluxo HTTP completo em banco H2: listar, detalhar, mudar status, atribuir responsável, atualizar evidência, adicionar etapa, resolver, exportar relatório, validar 404 e rejeitar payload inválido.
+## 🧪 Testes automatizados
+
+Os testes automatizados cobrem a criação de incidentes e a sugestão de checklist, além de um fluxo de integração HTTP utilizando H2. Entre os cenários previstos estão:
+
+- Listagem e consulta de incidentes.
+- Criação de incidente e checklist inicial.
+- Alteração de status e atribuição de responsável.
+- Inclusão de etapas de diagnóstico e atualização de evidências.
+- Resolução e exportação do relatório técnico.
+- Retorno HTTP 404 para recurso inexistente.
+- Rejeição de dados de entrada inválidos.
 
 Execute na raiz do projeto:
 
@@ -81,46 +119,52 @@ Execute na raiz do projeto:
 mvn test
 ```
 
-A imagem Docker executa `mvn test package` antes de montar a imagem final. Se algum teste falhar, o build falha em vez de entregar silenciosamente uma imagem com teste vermelho.
+O Dockerfile executa `mvn test package` antes de montar a imagem final. Se os testes falharem, o build deverá falhar em vez de gerar uma imagem final como se a validação tivesse sido concluída com sucesso.
 
-## Smoke test contra a aplicação em execução
+## 🔍 Smoke test da aplicação em execução
 
-Com o sistema iniciado em `http://localhost:8080`, em outro terminal execute:
+O script `scripts/smoke-test.py` é uma ferramenta **opcional** para verificar o funcionamento da API depois que a aplicação estiver iniciada. Ele não faz parte do runtime Java e não é necessário para abrir o sistema.
+
+Com a aplicação rodando em `http://localhost:8080`, abra outro terminal na raiz do projeto e execute:
 
 ```bash
 python scripts/smoke-test.py
 ```
 
-Se a aplicação estiver em outro endereço, defina `OPSBRIDGE_URL` antes de executar. Exemplo PowerShell:
+Se a aplicação estiver em outro endereço, defina `OPSBRIDGE_URL`.
+
+**PowerShell (Windows):**
 
 ```powershell
 $env:OPSBRIDGE_URL = "http://localhost:8080"
 python .\scripts\smoke-test.py
 ```
 
-O smoke test cria um incidente marcado `[SMOKE TEST]` e mantém o registro no banco para inspeção. Ele imprime cada etapa e retorna código diferente de zero se uma verificação falhar.
+O script cria um incidente identificado com `[SMOKE TEST]` e mantém esse registro no banco para inspeção. Ao final, informa as etapas verificadas e retorna um código diferente de zero se uma validação falhar. Por isso, execute-o preferencialmente em um ambiente de desenvolvimento com dados de teste.
 
-## API REST
+## 🔌 API REST
 
 | Método | Endpoint | Descrição |
 |---|---|---|
 | `GET` | `/api/incidents` | Lista incidentes |
-| `POST` | `/api/incidents` | Cria incidente |
-| `GET` | `/api/incidents/{id}` | Consulta detalhe e histórico |
-| `PATCH` | `/api/incidents/{id}/status` | Atualiza status |
-| `PATCH` | `/api/incidents/{id}/assignee` | Atribui responsável |
-| `POST` | `/api/incidents/{id}/checks` | Adiciona etapa de diagnóstico |
-| `PATCH` | `/api/incidents/{id}/checks/{checkId}` | Atualiza resultado/evidência |
-| `POST` | `/api/incidents/{id}/resolve` | Registra resolução |
-| `GET` | `/api/incidents/{id}/report` | Exporta relatório em texto |
+| `POST` | `/api/incidents` | Cria um incidente |
+| `GET` | `/api/incidents/{id}` | Consulta detalhes e histórico |
+| `PATCH` | `/api/incidents/{id}/status` | Atualiza o status |
+| `PATCH` | `/api/incidents/{id}/assignee` | Atribui um responsável |
+| `POST` | `/api/incidents/{id}/checks` | Adiciona uma etapa de diagnóstico |
+| `PATCH` | `/api/incidents/{id}/checks/{checkId}` | Atualiza resultado e evidência |
+| `POST` | `/api/incidents/{id}/resolve` | Registra a resolução |
+| `GET` | `/api/incidents/{id}/report` | Exporta o relatório em texto |
 
-Valores válidos de status: `OPEN`, `IN_PROGRESS`, `WAITING_FOR_USER`, `ESCALATED`, `RESOLVED`, `CLOSED`.
+### Valores aceitos
 
-Prioridades: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
+**Status:** `OPEN`, `IN_PROGRESS`, `WAITING_FOR_USER`, `ESCALATED`, `RESOLVED`, `CLOSED`.
 
-Resultados de diagnóstico: `PENDING`, `PASSED`, `FAILED`, `INCONCLUSIVE`, `NOT_APPLICABLE`.
+**Prioridades:** `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 
-## Estrutura principal
+**Resultados de diagnóstico:** `PENDING`, `PASSED`, `FAILED`, `INCONCLUSIVE`, `NOT_APPLICABLE`.
+
+## 📁 Estrutura do projeto
 
 ```text
 opsbridge-completo/
@@ -129,26 +173,54 @@ opsbridge-completo/
 ├── .env.example
 ├── iniciar-windows.bat
 ├── pom.xml
-├── scripts/smoke-test.py
-├── src/main/java/br/devbymarks/opsbridge/
-│   ├── OpsBridgeApplication.java
-│   └── incident/                  # entidades, DTOs, serviços e endpoints
-├── src/main/resources/
-│   ├── application.yml
-│   └── static/                    # index.html, styles.css, app.js
-└── src/test/
-    ├── java/                      # testes de serviço e integração HTTP
-    └── resources/application-test.yml
+├── scripts/
+│   └── smoke-test.py
+├── docs/
+│   ├── redesign-visual.md
+│   └── roteiros-diagnostico.md
+└── src/
+    ├── main/
+    │   ├── java/com/opsbridge/
+    │   │   ├── OpsBridgeApplication.java
+    │   │   └── incident/          # entidades, DTOs, serviços e endpoints
+    │   └── resources/
+    │       ├── application.yml
+    │       └── static/            # index.html, styles.css e app.js
+    └── test/
+        ├── java/com/opsbridge/incident/ # testes de serviço e integração HTTP
+        └── resources/application-test.yml
 ```
 
-## Segurança e limitações conhecidas
+## 🔐 Segurança e limitações
 
-- É um MVP de portfólio; não há login, controle de acesso, CSRF para uma futura autenticação ou gestão de perfis.
-- Credenciais padrão e `.env.example` servem apenas para desenvolvimento local.
-- `ddl-auto: update` é usado para facilitar o ambiente de demonstração. Para produção, adote Flyway/Liquibase e migrações revisadas.
-- Use dados fictícios. Não coloque senhas, tokens, dados pessoais ou informações confidenciais nas evidências.
-- Não exponha a porta do serviço para a internet sem autenticação, autorização, gestão de segredos, HTTPS, logs e política de backup.
+- Este projeto é um MVP de portfólio e **não possui login, autenticação ou autorização**.
+- As configurações de `.env.example` são destinadas apenas ao desenvolvimento local; não utilize credenciais de produção.
+- A configuração `ddl-auto: update` facilita a demonstração. Em um ambiente de produção, utilize migrações controladas, por exemplo com Flyway ou Liquibase.
+- Utilize somente dados fictícios. Não registre senhas, tokens, dados pessoais ou informações confidenciais nas evidências.
+- Não exponha a aplicação à internet antes de implementar autenticação, autorização, HTTPS, gestão segura de segredos, logging e política de backup.
 
-## Objetivo profissional
+## 🎯 Objetivo profissional
 
-Demonstrar troubleshooting estruturado, API REST, persistência relacional, validação, histórico de auditoria funcional, documentação e comunicação entre suporte N1/N2.
+O OpsBridge demonstra conhecimentos e práticas relacionados a:
+
+- Desenvolvimento backend com Java e Spring Boot.
+- Criação e organização de APIs REST.
+- Persistência relacional com PostgreSQL e JPA.
+- Validação de dados e tratamento de exceções.
+- Testes unitários e de integração.
+- Troubleshooting estruturado e documentação técnica.
+- Registro de evidências, histórico operacional e comunicação entre suporte N1/N2.
+
+## 👨‍💻 Autor
+
+**Matheus Marks**
+
+- GitHub: [@devbymarks](https://github.com/devbymarks)
+
+---
+
+<div align="center">
+
+**OpsBridge — transformar troubleshooting em um processo claro, rastreável e organizado.**
+
+</div>
