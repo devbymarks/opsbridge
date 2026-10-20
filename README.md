@@ -8,7 +8,7 @@ Uma aplicação demonstrativa para organizar rotinas de suporte N1/N2, acompanha
 
 </div>
 
-\---
+---
 
 ## 📌 Sobre o projeto
 
@@ -221,7 +221,7 @@ A plataforma reúne histórico de atividades, evidências de diagnóstico e rela
 
 
 
-\---
+---
 
 ## ⭐ Apoie o projeto
 
