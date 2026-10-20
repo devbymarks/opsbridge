@@ -4,7 +4,16 @@
 
 **Central de incidentes, troubleshooting e diagnóstico operacional de TI.**
 
-Uma aplicação demonstrativa para organizar rotinas de suporte N1/N2, acompanhar incidentes e registrar evidências técnicas em um único lugar.
+Uma aplicação para organizar rotinas de suporte N1/N2, acompanhar incidentes e registrar evidências técnicas.
+
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
 </div>
 
@@ -218,10 +227,6 @@ O OpsBridge demonstra conhecimentos e práticas relacionados a:
 Projeto desenvolvido com foco em diagnóstico de incidentes, troubleshooting e organização de operações de TI. O OpsBridge simula uma central para registrar incidentes, acompanhar seu andamento, atribuir responsáveis e documentar verificações técnicas.
 
 A plataforma reúne histórico de atividades, evidências de diagnóstico e relatórios de resolução em um fluxo estruturado, contribuindo para a padronização dos procedimentos de suporte e para uma comunicação mais clara entre equipes técnicas.
-
-
-
----
 
 ## ⭐ Apoie o projeto
 
